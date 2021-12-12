@@ -17,7 +17,8 @@ public class MyBatisMapperScannerConfig {
         System.out.println("扫描mapper");
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         System.out.println("扫描mapper----dao");
-        mapperScannerConfigurer.setBasePackage("com.gitee.sunchenbin.mybatis.actable.dao.*;com.lhdb.game.dao.*");
+//        mapperScannerConfigurer.setBasePackage("com.gitee.sunchenbin.mybatis.actable.dao.*;com.lhdb.game.dao.*");
+        mapperScannerConfigurer.setBasePackage("com.lhdb.game.dao.*");
         System.out.println("结束扫描mapper");
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         return mapperScannerConfigurer;

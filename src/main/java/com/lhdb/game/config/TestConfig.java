@@ -62,7 +62,8 @@ public class TestConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml;classpath*:com/lhdb/game/mapping/*.xml"));
+        //sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml;classpath*:com/lhdb/game/mapping/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/lhdb/game/mapping/*.xml"));
         sqlSessionFactoryBean.setTypeAliasesPackage("com.lhdb.game.entity.*");
         return sqlSessionFactoryBean;
     }
