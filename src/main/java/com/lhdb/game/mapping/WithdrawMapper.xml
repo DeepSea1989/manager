@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.WithdrawMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.Withdraw" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="money" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="score" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="reject" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rate" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="addtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="updatetime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, userid, username, money, score, status, reject, rate, addtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from withdraw
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from withdraw
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.Withdraw" >
+    insert into withdraw (Id, userid, username, money, score,
+      status, reject, rate, 
+      addtime, updatetime)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{money,jdbcType=BIGINT}, #{score,jdbcType=BIGINT},
+      #{status,jdbcType=INTEGER}, #{reject,jdbcType=VARCHAR}, #{rate,jdbcType=DOUBLE}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.Withdraw" >
+    insert into withdraw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="userid !=null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reject != null" >
+        reject,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid !=null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username!=null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reject != null" >
+        #{reject,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.Withdraw" >
+    update withdraw
+    <set >
+      <if test="money != null" >
+        money = #{money,jdbcType=BIGINT},
+      </if>
+      <if test="userid !=null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username !=null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reject != null" >
+        reject = #{reject,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.Withdraw" >
+    update withdraw
+    set money = #{money,jdbcType=BIGINT},
+      userid = #{userid,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      score = #{score,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      reject = #{reject,jdbcType=VARCHAR},
+      rate = #{rate,jdbcType=DOUBLE},
+      addtime = #{addtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="searchWithdraw" resultMap="BaseResultMap" parameterType="map">
+    select * from withdraw
+    <where>
+      <if test = "username != null and username != ''">
+        and user_name like concat('%',${username},'%')
+      </if>
+    </where>
+    limit ${currIndex} , ${pageSize}
+  </select>
+
+  <update id="passWithdraw" parameterType="map">
+    update withdraw set status = ${status} , updatetime = ${time}
+    where id in
+    <foreach collection="array"  item="id" open="(" separator="," close=")"  >${id}</foreach>
+  </update>
+
+  <update id="rejectWithdraw" parameterType="map">
+    update withdraw set status = ${status} , reject = ${reject}, updatetime = ${time}
+    where id in
+    <foreach collection="array"  item="id" open="(" separator="," close=")"  >${id}</foreach>
+  </update>
+
+
+</mapper>

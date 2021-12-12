@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.ShareSettingMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.ShareSetting" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="wxdomain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="livesharetitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="liveshareskill" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="androidurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="iosurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="videotitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, wxdomain, livesharetitle, liveshareskill, androidurl, iosurl, videotitle
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sharesetting
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sharesetting
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.ShareSetting" >
+    insert into sharesetting (Id, wxdomain, livesharetitle, 
+      liveshareskill, androidurl, iosurl, 
+      videotitle)
+    values (#{id,jdbcType=INTEGER}, #{wxdomain,jdbcType=VARCHAR}, #{livesharetitle,jdbcType=VARCHAR}, 
+      #{liveshareskill,jdbcType=VARCHAR}, #{androidurl,jdbcType=VARCHAR}, #{iosurl,jdbcType=VARCHAR}, 
+      #{videotitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.ShareSetting" >
+    insert into sharesetting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="wxdomain != null" >
+        wxdomain,
+      </if>
+      <if test="livesharetitle != null" >
+        livesharetitle,
+      </if>
+      <if test="liveshareskill != null" >
+        liveshareskill,
+      </if>
+      <if test="androidurl != null" >
+        androidurl,
+      </if>
+      <if test="iosurl != null" >
+        iosurl,
+      </if>
+      <if test="videotitle != null" >
+        videotitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="wxdomain != null" >
+        #{wxdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="livesharetitle != null" >
+        #{livesharetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="liveshareskill != null" >
+        #{liveshareskill,jdbcType=VARCHAR},
+      </if>
+      <if test="androidurl != null" >
+        #{androidurl,jdbcType=VARCHAR},
+      </if>
+      <if test="iosurl != null" >
+        #{iosurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videotitle != null" >
+        #{videotitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.ShareSetting" >
+    update sharesetting
+    <set >
+      <if test="wxdomain != null" >
+        wxdomain = #{wxdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="livesharetitle != null" >
+        livesharetitle = #{livesharetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="liveshareskill != null" >
+        liveshareskill = #{liveshareskill,jdbcType=VARCHAR},
+      </if>
+      <if test="androidurl != null" >
+        androidurl = #{androidurl,jdbcType=VARCHAR},
+      </if>
+      <if test="iosurl != null" >
+        iosurl = #{iosurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videotitle != null" >
+        videotitle = #{videotitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.ShareSetting" >
+    update sharesetting
+    set wxdomain = #{wxdomain,jdbcType=VARCHAR},
+      livesharetitle = #{livesharetitle,jdbcType=VARCHAR},
+      liveshareskill = #{liveshareskill,jdbcType=VARCHAR},
+      androidurl = #{androidurl,jdbcType=VARCHAR},
+      iosurl = #{iosurl,jdbcType=VARCHAR},
+      videotitle = #{videotitle,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.OrderDfMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.OrderDf" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="money" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="score" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="acc_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="certif_tp" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="certif_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="customer_nm" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ip_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="back_ip_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, order_id, user_id, money, score, acc_no, certif_tp, certif_id, customer_nm, state, 
+    ip_address, back_ip_address, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_df
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_df
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.OrderDf" >
+    insert into order_df (Id, order_id, user_id, 
+      money, score, acc_no, 
+      certif_tp, certif_id, customer_nm, 
+      state, ip_address, back_ip_address, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{money,jdbcType=BIGINT}, #{score,jdbcType=BIGINT}, #{accNo,jdbcType=VARCHAR}, 
+      #{certifTp,jdbcType=INTEGER}, #{certifId,jdbcType=VARCHAR}, #{customerNm,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{ipAddress,jdbcType=VARCHAR}, #{backIpAddress,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.OrderDf" >
+    insert into order_df
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="accNo != null" >
+        acc_no,
+      </if>
+      <if test="certifTp != null" >
+        certif_tp,
+      </if>
+      <if test="certifId != null" >
+        certif_id,
+      </if>
+      <if test="customerNm != null" >
+        customer_nm,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="backIpAddress != null" >
+        back_ip_address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+      <if test="accNo != null" >
+        #{accNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certifTp != null" >
+        #{certifTp,jdbcType=INTEGER},
+      </if>
+      <if test="certifId != null" >
+        #{certifId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNm != null" >
+        #{customerNm,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="backIpAddress != null" >
+        #{backIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.OrderDf" >
+    update order_df
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=BIGINT},
+      </if>
+      <if test="accNo != null" >
+        acc_no = #{accNo,jdbcType=VARCHAR},
+      </if>
+      <if test="certifTp != null" >
+        certif_tp = #{certifTp,jdbcType=INTEGER},
+      </if>
+      <if test="certifId != null" >
+        certif_id = #{certifId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNm != null" >
+        customer_nm = #{customerNm,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null" >
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="backIpAddress != null" >
+        back_ip_address = #{backIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.OrderDf" >
+    update order_df
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      money = #{money,jdbcType=BIGINT},
+      score = #{score,jdbcType=BIGINT},
+      acc_no = #{accNo,jdbcType=VARCHAR},
+      certif_tp = #{certifTp,jdbcType=INTEGER},
+      certif_id = #{certifId,jdbcType=VARCHAR},
+      customer_nm = #{customerNm,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      back_ip_address = #{backIpAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

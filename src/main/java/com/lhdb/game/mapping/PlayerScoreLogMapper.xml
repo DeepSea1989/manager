@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.PlayerScoreLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.PlayerScoreLog" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="UserID" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="Username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Score" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="Reson" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, UserID, Username, Score, Reson, Time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from playerscorelog
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from playerscorelog
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.PlayerScoreLog" >
+    insert into playerscorelog (Id, UserID, Username, 
+      Score, Reson)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
+      #{score,jdbcType=BIGINT}, #{reson,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.PlayerScoreLog" >
+    insert into playerscorelog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="username != null" >
+        Username,
+      </if>
+      <if test="score != null" >
+        Score,
+      </if>
+      <if test="reson != null" >
+        Reson,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+      <if test="reson != null" >
+        #{reson,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.PlayerScoreLog" >
+    update playerscorelog
+    <set >
+      <if test="userid != null" >
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        Score = #{score,jdbcType=BIGINT},
+      </if>
+      <if test="reson != null" >
+        Reson = #{reson,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.PlayerScoreLog" >
+    update playerscorelog
+    set UserID = #{userid,jdbcType=BIGINT},
+      Username = #{username,jdbcType=VARCHAR},
+      Score = #{score,jdbcType=BIGINT},
+      Reson = #{reson,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryPlayerScoreLog" resultMap="BaseResultMap" parameterType="map">
+    select * from playerscorelog
+    <where>
+      <if test = "username != null and username != ''">
+        and username like concat('%',${username},'%')
+      </if>
+    </where>
+    limit ${currIndex} , ${pageSize}
+  </select>
+</mapper>

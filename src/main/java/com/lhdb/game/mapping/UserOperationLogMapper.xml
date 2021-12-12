@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.UserOperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.UserOperationLog" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="uri" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="paramters" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="operationType" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="insertTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="moduleId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="permissionValue" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, userId, uri, paramters, operationType, insertTime, moduleId, permissionValue, 
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from useroperationlog
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from useroperationlog
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.UserOperationLog" >
+    insert into useroperationlog (Id, userId, uri, 
+      paramters, operationType, insertTime, 
+      moduleId, permissionValue, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, 
+      #{paramters,jdbcType=VARCHAR}, #{operationtype,jdbcType=INTEGER}, #{inserttime,jdbcType=TIMESTAMP}, 
+      #{moduleid,jdbcType=INTEGER}, #{permissionvalue,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.UserOperationLog" >
+    insert into useroperationlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="uri != null" >
+        uri,
+      </if>
+      <if test="paramters != null" >
+        paramters,
+      </if>
+      <if test="operationtype != null" >
+        operationType,
+      </if>
+      <if test="inserttime != null" >
+        insertTime,
+      </if>
+      <if test="moduleid != null" >
+        moduleId,
+      </if>
+      <if test="permissionvalue != null" >
+        permissionValue,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="paramters != null" >
+        #{paramters,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtype != null" >
+        #{operationtype,jdbcType=INTEGER},
+      </if>
+      <if test="inserttime != null" >
+        #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionvalue != null" >
+        #{permissionvalue,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.UserOperationLog" >
+    update useroperationlog
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        uri = #{uri,jdbcType=VARCHAR},
+      </if>
+      <if test="paramters != null" >
+        paramters = #{paramters,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtype != null" >
+        operationType = #{operationtype,jdbcType=INTEGER},
+      </if>
+      <if test="inserttime != null" >
+        insertTime = #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="moduleid != null" >
+        moduleId = #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionvalue != null" >
+        permissionValue = #{permissionvalue,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.UserOperationLog" >
+    update useroperationlog
+    set userId = #{userid,jdbcType=INTEGER},
+      uri = #{uri,jdbcType=VARCHAR},
+      paramters = #{paramters,jdbcType=VARCHAR},
+      operationType = #{operationtype,jdbcType=INTEGER},
+      insertTime = #{inserttime,jdbcType=TIMESTAMP},
+      moduleId = #{moduleid,jdbcType=INTEGER},
+      permissionValue = #{permissionvalue,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.RolePermission" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="RoleID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ModuleID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ManagerPermission" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="OperationPermission" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StateFlag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, RoleID, ModuleID, ManagerPermission, OperationPermission, StateFlag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rolepermission
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rolepermission
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.RolePermission" >
+    insert into rolepermission (Id, RoleID, ModuleID, 
+      ManagerPermission, OperationPermission, 
+      StateFlag)
+    values (#{id,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{moduleid,jdbcType=INTEGER}, 
+      #{managerpermission,jdbcType=INTEGER}, #{operationpermission,jdbcType=INTEGER}, 
+      #{stateflag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.RolePermission" >
+    insert into rolepermission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="roleid != null" >
+        RoleID,
+      </if>
+      <if test="moduleid != null" >
+        ModuleID,
+      </if>
+      <if test="managerpermission != null" >
+        ManagerPermission,
+      </if>
+      <if test="operationpermission != null" >
+        OperationPermission,
+      </if>
+      <if test="stateflag != null" >
+        StateFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="managerpermission != null" >
+        #{managerpermission,jdbcType=INTEGER},
+      </if>
+      <if test="operationpermission != null" >
+        #{operationpermission,jdbcType=INTEGER},
+      </if>
+      <if test="stateflag != null" >
+        #{stateflag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.RolePermission" >
+    update rolepermission
+    <set >
+      <if test="roleid != null" >
+        RoleID = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="moduleid != null" >
+        ModuleID = #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="managerpermission != null" >
+        ManagerPermission = #{managerpermission,jdbcType=INTEGER},
+      </if>
+      <if test="operationpermission != null" >
+        OperationPermission = #{operationpermission,jdbcType=INTEGER},
+      </if>
+      <if test="stateflag != null" >
+        StateFlag = #{stateflag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.RolePermission" >
+    update rolepermission
+    set RoleID = #{roleid,jdbcType=INTEGER},
+      ModuleID = #{moduleid,jdbcType=INTEGER},
+      ManagerPermission = #{managerpermission,jdbcType=INTEGER},
+      OperationPermission = #{operationpermission,jdbcType=INTEGER},
+      StateFlag = #{stateflag,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

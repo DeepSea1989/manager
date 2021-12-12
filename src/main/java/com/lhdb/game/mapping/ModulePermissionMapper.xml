@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.ModulePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.ModulePermission" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ModuleID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PermissionValue" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="PermissionTitle" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Nullity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="StateFlag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ParentID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Uri" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, ModuleID, PermissionValue, PermissionTitle, Nullity, StateFlag, ParentID, Uri
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from modulepermission
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from modulepermission
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.ModulePermission" >
+    insert into modulepermission (Id, ModuleID, PermissionValue, 
+      PermissionTitle, Nullity, StateFlag, 
+      ParentID, Uri)
+    values (#{id,jdbcType=INTEGER}, #{moduleid,jdbcType=INTEGER}, #{permissionvalue,jdbcType=INTEGER}, 
+      #{permissiontitle,jdbcType=VARCHAR}, #{nullity,jdbcType=INTEGER}, #{stateflag,jdbcType=INTEGER}, 
+      #{parentid,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.ModulePermission" >
+    insert into modulepermission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="moduleid != null" >
+        ModuleID,
+      </if>
+      <if test="permissionvalue != null" >
+        PermissionValue,
+      </if>
+      <if test="permissiontitle != null" >
+        PermissionTitle,
+      </if>
+      <if test="nullity != null" >
+        Nullity,
+      </if>
+      <if test="stateflag != null" >
+        StateFlag,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="uri != null" >
+        Uri,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionvalue != null" >
+        #{permissionvalue,jdbcType=INTEGER},
+      </if>
+      <if test="permissiontitle != null" >
+        #{permissiontitle,jdbcType=VARCHAR},
+      </if>
+      <if test="nullity != null" >
+        #{nullity,jdbcType=INTEGER},
+      </if>
+      <if test="stateflag != null" >
+        #{stateflag,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        #{uri,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.ModulePermission" >
+    update modulepermission
+    <set >
+      <if test="moduleid != null" >
+        ModuleID = #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="permissionvalue != null" >
+        PermissionValue = #{permissionvalue,jdbcType=INTEGER},
+      </if>
+      <if test="permissiontitle != null" >
+        PermissionTitle = #{permissiontitle,jdbcType=VARCHAR},
+      </if>
+      <if test="nullity != null" >
+        Nullity = #{nullity,jdbcType=INTEGER},
+      </if>
+      <if test="stateflag != null" >
+        StateFlag = #{stateflag,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        ParentID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="uri != null" >
+        Uri = #{uri,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.ModulePermission" >
+    update modulepermission
+    set ModuleID = #{moduleid,jdbcType=INTEGER},
+      PermissionValue = #{permissionvalue,jdbcType=INTEGER},
+      PermissionTitle = #{permissiontitle,jdbcType=VARCHAR},
+      Nullity = #{nullity,jdbcType=INTEGER},
+      StateFlag = #{stateflag,jdbcType=INTEGER},
+      ParentID = #{parentid,jdbcType=INTEGER},
+      Uri = #{uri,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

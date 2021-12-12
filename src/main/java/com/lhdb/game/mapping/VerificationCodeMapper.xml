@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.VerificationCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.VerificationCode" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="infotype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, infotype, mobile, message, time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from verificationcode
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from verificationcode
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.VerificationCode" >
+    insert into verificationcode (Id, infotype, mobile, 
+      message, time)
+    values (#{id,jdbcType=INTEGER}, #{infotype,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.VerificationCode" >
+    insert into verificationcode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="infotype != null" >
+        infotype,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="infotype != null" >
+        #{infotype,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.VerificationCode" >
+    update verificationcode
+    <set >
+      <if test="infotype != null" >
+        infotype = #{infotype,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.VerificationCode" >
+    update verificationcode
+    set infotype = #{infotype,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryVeriCode" resultMap="BaseResultMap" parameterType="com.lhdb.game.entity.VerificationCode" >
+    select
+    <include refid="Base_Column_List" />
+    from verificationcode
+    where mobile = CONVERT(#{username} USING 'utf8mb4') and message=#{code}
+  </select>
+
+  <select id="queryVerificationCode" resultMap="BaseResultMap" parameterType="map">
+    select * from verificationcode
+    <where>
+      <if test = "mobile != null and mobile != ''">
+        and mobile like concat('%',${mobile},'%')
+      </if>
+      <if test="message != null and message != ''">
+        and message like concat('%',${message},'%')
+      </if>
+    </where>
+    limit ${currIndex} , ${pageSize}
+  </select>
+</mapper>

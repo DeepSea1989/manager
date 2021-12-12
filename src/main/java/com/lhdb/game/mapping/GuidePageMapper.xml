@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.GuidePageMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.GuidePage" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ison" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="imgurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="videourl" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, ison, type, time, imgurl, videourl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from guidepage
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from guidepage
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.GuidePage" >
+    insert into guidepage (Id, ison, type, 
+      time, imgurl, videourl
+      )
+    values (#{id,jdbcType=INTEGER}, #{ison,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{imgurl,jdbcType=VARCHAR}, #{videourl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.GuidePage" >
+    insert into guidepage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="ison != null" >
+        ison,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="videourl != null" >
+        videourl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ison != null" >
+        #{ison,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videourl != null" >
+        #{videourl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.GuidePage" >
+    update guidepage
+    <set >
+      <if test="ison != null" >
+        ison = #{ison,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videourl != null" >
+        videourl = #{videourl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.GuidePage" >
+    update guidepage
+    set ison = #{ison,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      videourl = #{videourl,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteByIds" parameterType="java.lang.String">
+    delete from guidepage where 1>2 or id in
+    <foreach collection="array"  item="id" open="(" separator="," close=")"  >${id}</foreach>
+  </delete>
+
+  <update id="updateGuidePage" parameterType="com.lhdb.game.entity.GuidePage">
+    update guidepage
+    <set>
+      <if test="ison != null and ison != ''">
+        ison = #{ison,jdbcType=INTEGER},
+      </if>
+      <if test="type != null and type != ''">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="time !=null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgurl != null and img != ''">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videourl != null and videourl != ''">
+        videourl = #{videourl,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryGuidePage" resultMap="BaseResultMap" parameterType="map">
+    select * from guidepage
+    <where>
+      <if test = "ison != null and ison != ''">
+        and ison = ${ison}
+      </if>
+      <if test="type != null and type != ''">
+        and type = ${type}
+      </if>
+    </where>
+    limit ${currIndex} , ${pageSize}
+  </select>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.AppVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.AppVersion" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="apkversion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="apkurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="apkexplain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ipaversion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ipashelfversion" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ipaurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ipaexplain" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="qrcode" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, apkversion, apkurl, apkexplain, ipaversion, ipashelfversion, ipaurl, ipaexplain, 
+    qrcode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from appversion
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from appversion
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.AppVersion" >
+    insert into appversion (Id, apkversion, apkurl, 
+      apkexplain, ipaversion, ipashelfversion, 
+      ipaurl, ipaexplain, qrcode
+      )
+    values (#{id,jdbcType=INTEGER}, #{apkversion,jdbcType=VARCHAR}, #{apkurl,jdbcType=VARCHAR}, 
+      #{apkexplain,jdbcType=VARCHAR}, #{ipaversion,jdbcType=VARCHAR}, #{ipashelfversion,jdbcType=VARCHAR}, 
+      #{ipaurl,jdbcType=VARCHAR}, #{ipaexplain,jdbcType=VARCHAR}, #{qrcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.AppVersion" >
+    insert into appversion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="apkversion != null" >
+        apkversion,
+      </if>
+      <if test="apkurl != null" >
+        apkurl,
+      </if>
+      <if test="apkexplain != null" >
+        apkexplain,
+      </if>
+      <if test="ipaversion != null" >
+        ipaversion,
+      </if>
+      <if test="ipashelfversion != null" >
+        ipashelfversion,
+      </if>
+      <if test="ipaurl != null" >
+        ipaurl,
+      </if>
+      <if test="ipaexplain != null" >
+        ipaexplain,
+      </if>
+      <if test="qrcode != null" >
+        qrcode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="apkversion != null" >
+        #{apkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="apkurl != null" >
+        #{apkurl,jdbcType=VARCHAR},
+      </if>
+      <if test="apkexplain != null" >
+        #{apkexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaversion != null" >
+        #{ipaversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipashelfversion != null" >
+        #{ipashelfversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaurl != null" >
+        #{ipaurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaexplain != null" >
+        #{ipaexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null" >
+        #{qrcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.AppVersion" >
+    update appversion
+    <set >
+      <if test="apkversion != null" >
+        apkversion = #{apkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="apkurl != null" >
+        apkurl = #{apkurl,jdbcType=VARCHAR},
+      </if>
+      <if test="apkexplain != null" >
+        apkexplain = #{apkexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaversion != null" >
+        ipaversion = #{ipaversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipashelfversion != null" >
+        ipashelfversion = #{ipashelfversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaurl != null" >
+        ipaurl = #{ipaurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaexplain != null" >
+        ipaexplain = #{ipaexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null" >
+        qrcode = #{qrcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.AppVersion" >
+    update appversion
+    set apkversion = #{apkversion,jdbcType=VARCHAR},
+      apkurl = #{apkurl,jdbcType=VARCHAR},
+      apkexplain = #{apkexplain,jdbcType=VARCHAR},
+      ipaversion = #{ipaversion,jdbcType=VARCHAR},
+      ipashelfversion = #{ipashelfversion,jdbcType=VARCHAR},
+      ipaurl = #{ipaurl,jdbcType=VARCHAR},
+      ipaexplain = #{ipaexplain,jdbcType=VARCHAR},
+      qrcode = #{qrcode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateAppVersion" parameterType="com.lhdb.game.entity.AppVersion" >
+    update appversion
+    <set>
+      <if test="apkversion != null and apkversion != ''">
+        apkversion = #{apkversion,jdbcType=VARCHAR},
+      </if>
+      <if test="apkurl != null and apkurl != ''">
+        apkurl = #{apkurl,jdbcType=VARCHAR},
+      </if>
+      <if test="apkexplain != null and apkexplain != ''">
+        apkexplain = #{apkexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaversion != null and ipaversion != ''">
+        ipaversion = #{ipaversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipashelfversion != null and ipashelfversion != ''">
+        ipashelfversion = #{ipashelfversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaurl != null and ipaurl != ''">
+        ipaurl = #{ipaurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaexplain != null and ipaexplain != ''">
+        ipaexplain = #{ipaexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null and qrcode != ''">
+        qrcode = #{qrcode,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

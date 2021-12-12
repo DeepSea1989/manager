@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhdb.game.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lhdb.game.entity.OrderInfo" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="order_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="money" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="score" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="ip_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="back_ip_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="orderno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tradno" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="payid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="paytype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="paystatus" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, order_id, user_id, money, score, state, ip_address, back_ip_address, create_time, 
+    update_time, orderno, tradno, payid, paytype, paystatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_info
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lhdb.game.entity.OrderInfo" >
+    insert into order_info (Id, order_id, user_id, 
+      money, score, state, 
+      ip_address, back_ip_address, create_time, 
+      update_time, orderno, tradno, 
+      payid, paytype, paystatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
+      #{money,jdbcType=BIGINT}, #{score,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, 
+      #{ipAddress,jdbcType=VARCHAR}, #{backIpAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{orderno,jdbcType=VARCHAR}, #{tradno,jdbcType=VARCHAR}, 
+      #{payid,jdbcType=INTEGER}, #{paytype,jdbcType=INTEGER}, #{paystatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhdb.game.entity.OrderInfo" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="backIpAddress != null" >
+        back_ip_address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="orderno != null" >
+        orderno,
+      </if>
+      <if test="tradno != null" >
+        tradno,
+      </if>
+      <if test="payid != null" >
+        payid,
+      </if>
+      <if test="paytype != null" >
+        paytype,
+      </if>
+      <if test="paystatus != null" >
+        paystatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="backIpAddress != null" >
+        #{backIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tradno != null" >
+        #{tradno,jdbcType=VARCHAR},
+      </if>
+      <if test="payid != null" >
+        #{payid,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null" >
+        #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        #{paystatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhdb.game.entity.OrderInfo" >
+    update order_info
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=BIGINT},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=BIGINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="ipAddress != null" >
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="backIpAddress != null" >
+        back_ip_address = #{backIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderno != null" >
+        orderno = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tradno != null" >
+        tradno = #{tradno,jdbcType=VARCHAR},
+      </if>
+      <if test="payid != null" >
+        payid = #{payid,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null" >
+        paytype = #{paytype,jdbcType=INTEGER},
+      </if>
+      <if test="paystatus != null" >
+        paystatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhdb.game.entity.OrderInfo" >
+    update order_info
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      money = #{money,jdbcType=BIGINT},
+      score = #{score,jdbcType=BIGINT},
+      state = #{state,jdbcType=INTEGER},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      back_ip_address = #{backIpAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      orderno = #{orderno,jdbcType=VARCHAR},
+      tradno = #{tradno,jdbcType=VARCHAR},
+      payid = #{payid,jdbcType=INTEGER},
+      paytype = #{paytype,jdbcType=INTEGER},
+      paystatus = #{paystatus,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="searchOrderList" resultMap="BaseResultMap" parameterType="map">
+    select * from order_info
+    <where>
+      <if test = "userid != null and userid != ''">
+        and user_id like concat('%',${userid},'%')
+      </if>
+      <if test = "orderid != null and orderid != ''">
+        and order_id like concat('%',${orderid},'%')
+      </if>
+      <if test="paytype != null and paytype != ''">
+        and paytype = ${paytype}
+      </if>
+    </where>
+    limit ${currIndex} , ${pageSize}
+  </select>
+
+</mapper>
